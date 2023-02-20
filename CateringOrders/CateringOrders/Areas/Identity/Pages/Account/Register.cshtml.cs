@@ -75,6 +75,17 @@ namespace CateringOrders.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+
+            /// 
+
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+            
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -159,7 +170,12 @@ namespace CateringOrders.Areas.Identity.Pages.Account
         {
             try
             {
-                return Activator.CreateInstance<ApplicationUser>();
+                var result = Activator.CreateInstance<ApplicationUser>();
+
+                result.FirstName = Input.FirstName;
+                result.LastName= Input.LastName;
+
+                return result;
             }
             catch
             {

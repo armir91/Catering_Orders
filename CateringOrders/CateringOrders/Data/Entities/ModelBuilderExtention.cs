@@ -38,5 +38,24 @@ public static class ModelBuilderExtention
         };
 
         _ = builder.Entity<FoodCategory>().HasData(fruits);
+
+
+        var roleCode = new ApplicationRole
+        {
+            Id = 1,
+            Code = "EMP",
+            Name = "Employee"
+        };
+
+        _ = builder.Entity<ApplicationRole>().HasData(roleCode);
+
+        var roleCode2 = new ApplicationRole
+        {
+            Id = 2,
+            Code = "COOK",
+            Name = "COOKER"
+        };
+
+        _ = builder.Entity<ApplicationRole>().HasData(roleCode2);
     }
 }

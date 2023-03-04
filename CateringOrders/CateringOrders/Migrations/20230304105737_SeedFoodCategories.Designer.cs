@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CateringOrders.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230222133511_InitialAddEntities")]
-    partial class InitialAddEntities
+    [Migration("20230304105737_SeedFoodCategories")]
+    partial class SeedFoodCategories
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -184,6 +184,28 @@ namespace CateringOrders.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FoodCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Salads"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Main Plate"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Dessert"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Fruits"
+                        });
                 });
 
             modelBuilder.Entity("CateringOrders.Data.Entities.FoodItems", b =>

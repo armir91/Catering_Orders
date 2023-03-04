@@ -4,6 +4,7 @@ using CateringOrders.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CateringOrders.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230303215036_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,28 +184,6 @@ namespace CateringOrders.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FoodCategory");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Salads"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Main Plate"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Dessert"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Fruits"
-                        });
                 });
 
             modelBuilder.Entity("CateringOrders.Data.Entities.FoodItems", b =>

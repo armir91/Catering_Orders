@@ -349,3 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /CateringOrders/CateringOrders/appsettings.Development.json
+/CateringOrders/CateringOrders/appsettings.Development.json

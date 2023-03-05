@@ -44,7 +44,8 @@ public static class ModelBuilderExtention
         {
             Id = 1,
             Code = "EMP",
-            Name = "Employee"
+            Name = "Employee",
+            NormalizedName = "EMPLOYEE"
         };
 
         _ = builder.Entity<ApplicationRole>().HasData(roleCode);
@@ -53,9 +54,11 @@ public static class ModelBuilderExtention
         {
             Id = 2,
             Code = "COOK",
-            Name = "COOKER"
+            Name = "Cooker",
+            NormalizedName = "COOKER"
         };
 
         _ = builder.Entity<ApplicationRole>().HasData(roleCode2);
+
     }
 }

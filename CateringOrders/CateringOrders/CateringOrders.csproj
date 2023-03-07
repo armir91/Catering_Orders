@@ -16,11 +16,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BLL\Services\Implementations\" />
-    <Folder Include="BLL\Services\Interfaces\" />
-    <Folder Include="Data\Repositories\Implementations\" />
-    <Folder Include="Data\Repositories\Interfaces\" />
-  </ItemGroup>
-
 </Project>

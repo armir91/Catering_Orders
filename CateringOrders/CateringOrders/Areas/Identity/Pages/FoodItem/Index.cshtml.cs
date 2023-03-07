@@ -8,26 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using CateringOrders.Data;
 using CateringOrders.Data.Entities;
 
-namespace CateringOrders.Areas.Identity.Pages.FoodItem
+namespace CateringOrders.Areas.Identity.Pages.FoodItem;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly CateringOrders.Data.ApplicationDbContext _context;
+
+    public IndexModel(CateringOrders.Data.ApplicationDbContext context)
     {
-        private readonly CateringOrders.Data.ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public IndexModel(CateringOrders.Data.ApplicationDbContext context)
+    public IList<FoodItems> FoodItems { get;set; } = default!;
+
+    public async Task OnGetAsync()
+    {
+        if (_context.FoodItems != null)
         {
-            _context = context;
-        }
-
-        public IList<FoodItems> FoodItems { get;set; } = default!;
-
-        public async Task OnGetAsync()
-        {
-            if (_context.FoodItems != null)
-            {
-                FoodItems = await _context.FoodItems
-                .Include(f => f.FoodCategory).ToListAsync();
-            }
+            FoodItems = await _context.FoodItems
+            .Include(f => f.FoodCategory).ToListAsync();
         }
     }
 }

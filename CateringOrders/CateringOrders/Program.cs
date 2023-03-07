@@ -1,5 +1,6 @@
 using CateringOrders.Data;
 using CateringOrders.Data.Entities;
+using CateringOrders.Data.Repositories.Implementations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,11 @@ builder.Services
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders()
     .AddDefaultUI();
+
+
+// DEPENDENCY INJECTION
+builder.Services.AddScoped<IFoodCategoryRepository, FoodCategoryRepository>();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

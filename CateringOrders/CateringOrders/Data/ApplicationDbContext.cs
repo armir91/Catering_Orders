@@ -25,6 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
         builder.Entity<ApplicationUser>().ToTable("Users");
         builder.Entity<ApplicationRole>().ToTable("Roles");
 
+
         builder.Seed();
     }
 }

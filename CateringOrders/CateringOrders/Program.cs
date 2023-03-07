@@ -1,3 +1,5 @@
+using CateringOrders.BLL.Services.Implementations;
+using CateringOrders.BLL.Services.Interfaces;
 using CateringOrders.Data;
 using CateringOrders.Data.Entities;
 using CateringOrders.Data.Repositories.Implementations;
@@ -24,6 +26,7 @@ builder.Services
 
 // DEPENDENCY INJECTION
 builder.Services.AddScoped<IFoodCategoryRepository, FoodCategoryRepository>();
+builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
 
 
 builder.Services.AddControllersWithViews();

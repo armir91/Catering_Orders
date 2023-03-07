@@ -9,70 +9,69 @@ using Microsoft.EntityFrameworkCore;
 using CateringOrders.Data;
 using CateringOrders.Data.Entities;
 
-namespace CateringOrders.Areas.Identity.Pages.FoodItem
-{
-    public class EditModel : PageModel
-    {
-        private readonly CateringOrders.Data.ApplicationDbContext _context;
+namespace CateringOrders.Areas.Identity.Pages.FoodItem;
 
-        public EditModel(CateringOrders.Data.ApplicationDbContext context)
+public class EditModel : PageModel
+{
+    private readonly CateringOrders.Data.ApplicationDbContext _context;
+
+    public EditModel(CateringOrders.Data.ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    [BindProperty]
+    public FoodItems FoodItems { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null || _context.FoodItems == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-        public FoodItems FoodItems { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        var fooditems =  await _context.FoodItems.FirstOrDefaultAsync(m => m.Id == id);
+        if (fooditems == null)
         {
-            if (id == null || _context.FoodItems == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
+        FoodItems = fooditems;
+       ViewData["CategoryId"] = new SelectList(_context.FoodCategory, "Id", "Id");
+        return Page();
+    }
 
-            var fooditems =  await _context.FoodItems.FirstOrDefaultAsync(m => m.Id == id);
-            if (fooditems == null)
-            {
-                return NotFound();
-            }
-            FoodItems = fooditems;
-           ViewData["CategoryId"] = new SelectList(_context.FoodCategory, "Id", "Id");
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        _context.Attach(FoodItems).State = EntityState.Modified;
+
+        try
         {
-            if (!ModelState.IsValid)
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!FoodItemsExists(FoodItems.Id))
             {
-                return Page();
+                return NotFound();
             }
-
-            _context.Attach(FoodItems).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                throw;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FoodItemsExists(FoodItems.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
         }
 
-        private bool FoodItemsExists(int id)
-        {
-          return _context.FoodItems.Any(e => e.Id == id);
-        }
+        return RedirectToPage("./Index");
+    }
+
+    private bool FoodItemsExists(int id)
+    {
+      return _context.FoodItems.Any(e => e.Id == id);
     }
 }

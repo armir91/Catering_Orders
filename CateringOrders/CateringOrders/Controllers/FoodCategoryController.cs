@@ -1,20 +1,21 @@
-﻿using CateringOrders.Data.Repositories.Implementations;
+﻿using CateringOrders.BLL.Services.Interfaces;
+using CateringOrders.Data.Repositories.Implementations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CateringOrders.Controllers;
 
 public class FoodCategoryController : Controller
 {
-    private readonly IFoodCategoryRepository _foodCategoryRepository;
+    private readonly IFoodCategoryService _foodCategoryService;
 
-    public FoodCategoryController(IFoodCategoryRepository foodCategoryRepository)
+    public FoodCategoryController(IFoodCategoryService foodCategoryService)
     {
-        _foodCategoryRepository = foodCategoryRepository ?? throw new ArgumentNullException(nameof(foodCategoryRepository));
+        _foodCategoryService = foodCategoryService ?? throw new ArgumentNullException(nameof(foodCategoryService));
     }
 
     public async Task<IActionResult> Index()
     {
-        var resultTotal = await _foodCategoryRepository.GetAll();
+        var resultTotal = await _foodCategoryService.GetAll();
 
         return View(resultTotal);
 

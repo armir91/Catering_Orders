@@ -1,7 +1,7 @@
-﻿using CateringOrders.BLL.Interfaces;
+﻿using CateringOrders.BLL.Services.Interfaces;
 using CateringOrders.Data.Entities;
 
-namespace CateringOrders.BLL.Implementations;
+namespace CateringOrders.BLL.Services.Implementations;
 
 public class ApplicationUserService : IApplicationUserService
 {

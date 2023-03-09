@@ -3,6 +3,7 @@ using CateringOrders.BLL.Services.Interfaces;
 using CateringOrders.Data;
 using CateringOrders.Data.Entities;
 using CateringOrders.Data.Repositories.Implementations;
+using CateringOrders.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,9 @@ builder.Services
 // DEPENDENCY INJECTION
 builder.Services.AddScoped<IFoodCategoryRepository, FoodCategoryRepository>();
 builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
+
+builder.Services.AddScoped<IEmployeeOrdersRepository, EmployeeOrdersRepository>();
+builder.Services.AddScoped<IEmployeeOrdersService, EmployeeOrdersService>();
 
 
 builder.Services.AddControllersWithViews();

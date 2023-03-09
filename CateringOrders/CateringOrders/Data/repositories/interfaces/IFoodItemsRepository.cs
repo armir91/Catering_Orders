@@ -1,6 +1,14 @@
-﻿namespace CateringOrders.Data.Repositories.Implementations
+﻿using CateringOrders.Data.Entities;
+
+namespace CateringOrders.Data.Repositories.Implementations
 {
     public interface IFoodItemsRepository
     {
+        Task<List<FoodItems>> GetAllAsync();
+        Task<FoodItems> AddAsync(FoodItems foodItems);
+        Task<FoodItems> UpdateAsync(FoodItems foodItems);
+        Task<FoodItems> DeleteAsync(int id);
+        Task<FoodItems> GetAsync(int id);
+        Task<bool> ExistAsync(string name);
     }
 }

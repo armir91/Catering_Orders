@@ -29,6 +29,9 @@ builder.Services
 builder.Services.AddScoped<IFoodCategoryRepository, FoodCategoryRepository>();
 builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
 
+builder.Services.AddScoped<IFoodItemsRepository, FoodItemsRepository>();
+builder.Services.AddScoped<IFoodItemsService, FoodItemsService>();
+
 builder.Services.AddScoped<IEmployeeOrdersRepository, EmployeeOrdersRepository>();
 builder.Services.AddScoped<IEmployeeOrdersService, EmployeeOrdersService>();
 

@@ -1,5 +1,6 @@
 ﻿using CateringOrders.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace CateringOrders.Data.Repositories.Implementations;
 
@@ -12,7 +13,9 @@ public class FoodItemsRepository : IFoodItemsRepository
     }
     public async Task<List<FoodItems>> GetAllAsync()
     {
-        var result = await _context.FoodItems.ToListAsync();
+        var result = await _context.FoodItems
+            .Include(f => f.FoodCategory)
+            .ToListAsync();
         return result;
     }
     public Task<FoodItems> AddAsync(FoodItems foodItems)

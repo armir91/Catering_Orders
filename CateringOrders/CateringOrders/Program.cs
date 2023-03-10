@@ -35,6 +35,9 @@ builder.Services.AddScoped<IFoodItemsService, FoodItemsService>();
 builder.Services.AddScoped<IEmployeeOrdersRepository, EmployeeOrdersRepository>();
 builder.Services.AddScoped<IEmployeeOrdersService, EmployeeOrdersService>();
 
+builder.Services.AddScoped<IDailyMenuRepository, DailyMenuRepository>();
+builder.Services.AddScoped<IDailyMenuService, DailyMenuService>();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

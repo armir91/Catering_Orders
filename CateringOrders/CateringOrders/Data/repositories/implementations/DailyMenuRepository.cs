@@ -15,7 +15,9 @@ public class DailyMenuRepository : IDailyMenuRepository
 
     public async Task<List<DailyMenu>> GetAllAsync()
     {
-        var result = await _context.DailyMenus.ToListAsync();
+        var result = await _context.DailyMenus
+            .Include(d => d.FoodItems)
+            .ToListAsync();
         return result;
     }
 

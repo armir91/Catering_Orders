@@ -20,9 +20,14 @@ public class FoodItemsService : IFoodItemsService
         return result;
     }
 
-    public Task<FoodItems> Create(FoodItems foodItems)
+    public async Task<FoodItems> Create(FoodItems foodItems)
     {
-        var result = _foodItemsRepository.Create(foodItems);
+        var result = await _foodItemsRepository.Create(foodItems);
         return result;
+    }
+
+    public async Task<FoodItems> DeleteAsync(int id)
+    {
+        return await _foodItemsRepository.DeleteAsync(id);
     }
 }

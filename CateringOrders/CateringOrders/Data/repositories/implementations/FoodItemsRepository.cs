@@ -20,11 +20,18 @@ public class FoodItemsRepository : IFoodItemsRepository
     }
     public async Task<FoodItems> Create(FoodItems foodItems)
     {
-        throw new NotImplementedException();
+        await _context.FoodItems.AddAsync(foodItems);
+        await _context.SaveChangesAsync();
+        return (foodItems);
     }
-    public Task<FoodItems> DeleteAsync(int id)
+    public async Task<FoodItems> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var softDeleteItem = await _context.FoodItems.FindAsync(id);
+        softDeleteItem.IsDeleted = true;
+        _context.FoodItems.Update(softDeleteItem);
+        await _context.SaveChangesAsync();
+
+        return softDeleteItem;
     }
     public Task<bool> ExistAsync(string name)
     {

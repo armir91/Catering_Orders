@@ -6,4 +6,5 @@ public interface IFoodItemsService
 {
     Task<List<FoodItems>> GetAll();
     Task<FoodItems> Create(FoodItems foodItems);
+    Task<FoodItems> DeleteAsync(int id);
 }

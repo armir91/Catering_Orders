@@ -18,7 +18,7 @@ public class FoodItemsRepository : IFoodItemsRepository
             .ToListAsync();
         return result;
     }
-    public Task<FoodItems> AddAsync(FoodItems foodItems)
+    public async Task<FoodItems> Create(FoodItems foodItems)
     {
         throw new NotImplementedException();
     }

@@ -17,7 +17,8 @@ public class EmployeeOrdersRepository : IEmployeeOrdersRepository
 	{
           var result = await _context.Orders
             .Include(o => o.ApplicationUser)
-            .Include(o => o.FoodItems).ToListAsync();
+            .Include(o => o.FoodItems)
+			.ToListAsync();
 
         return result;
 	}

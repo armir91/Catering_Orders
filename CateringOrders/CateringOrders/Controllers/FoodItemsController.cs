@@ -19,14 +19,12 @@ public class FoodItemsController : Controller
     public async Task<IActionResult> Index()
     {
         var resultTotal = await _foodItemsService.GetAll();
-
         return View(resultTotal);
-
     }
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
-        var foodCategories = _foodItemsService.GetAll();
+        var foodCategories = await _foodCategoryService.GetAll();
         ViewBag.FoodCategories = foodCategories;
         return View();
     }

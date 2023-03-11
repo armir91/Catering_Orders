@@ -1,23 +1,42 @@
 ﻿using CateringOrders.BLL.Services.Interfaces;
+using CateringOrders.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Policy;
 
-namespace CateringOrders.Controllers
+namespace CateringOrders.Controllers;
+
+public class FoodItemsController : Controller
 {
-    public class FoodItemsController :Controller
+    private readonly IFoodItemsService _foodItemsService;
+    private readonly IFoodCategoryService _foodCategoryService;
+
+    public FoodItemsController(IFoodItemsService foodItemsService, IFoodCategoryService foodCategoryService)
     {
-        private readonly IFoodItemsService _foodItemsService;
+        _foodItemsService = foodItemsService ?? throw new ArgumentNullException(nameof(foodItemsService));
+        _foodCategoryService = foodCategoryService ?? throw new ArgumentNullException(nameof(_foodCategoryService));
+    }
 
-        public FoodItemsController(IFoodItemsService foodItemsService)
-        {
-            _foodItemsService = foodItemsService ?? throw new ArgumentNullException(nameof(foodItemsService));
-        }
+    public async Task<IActionResult> Index()
+    {
+        var resultTotal = await _foodItemsService.GetAll();
 
-        public async Task<IActionResult> Index()
-        {
-            var resultTotal = await _foodItemsService.GetAll();
+        return View(resultTotal);
 
-            return View(resultTotal);
+    }
 
-        }
+    public IActionResult Create()
+    {
+        var foodCategories = _foodItemsService.GetAll();
+        ViewBag.FoodCategories = foodCategories;
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Create(FoodItems foodItems)
+    {
+        var result = await _foodItemsService.Create(foodItems);
+
+        return View(result);
     }
 }

@@ -5,7 +5,7 @@ namespace CateringOrders.Data.Repositories.Implementations
     public interface IFoodItemsRepository
     {
         Task<List<FoodItems>> GetAllAsync();
-        Task<FoodItems> AddAsync(FoodItems foodItems);
+        Task<FoodItems> Create(FoodItems foodItems);
         Task<FoodItems> UpdateAsync(FoodItems foodItems);
         Task<FoodItems> DeleteAsync(int id);
         Task<FoodItems> GetAsync(int id);

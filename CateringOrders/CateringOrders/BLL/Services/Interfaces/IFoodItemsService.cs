@@ -7,4 +7,7 @@ public interface IFoodItemsService
     Task<List<FoodItems>> GetAll();
     Task<FoodItems> Create(FoodItems foodItems);
     Task<FoodItems> DeleteAsync(int id);
+    Task<FoodItems> Update(int id);
+    Task<FoodItems> Update(FoodItems foodItems);
+    Task<FoodItems> GetAsync(int id);
 }

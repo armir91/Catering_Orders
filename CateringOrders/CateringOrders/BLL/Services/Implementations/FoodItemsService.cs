@@ -30,4 +30,18 @@ public class FoodItemsService : IFoodItemsService
     {
         return await _foodItemsRepository.DeleteAsync(id);
     }
+
+    public async Task<FoodItems> Update(int id)
+    {
+        return await _foodItemsRepository.GetAsync(id);
+    }
+    public async Task<FoodItems> Update(FoodItems foodItems)
+    {
+        return await _foodItemsRepository.Update(foodItems);
+    }
+
+    public async Task<FoodItems> GetAsync(int id)
+    {
+        return await _foodItemsRepository.GetAsync(id);
+    }
 }

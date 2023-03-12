@@ -1,6 +1,7 @@
 ﻿using CateringOrders.BLL.Services.Interfaces;
 using CateringOrders.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Policy;
 
@@ -48,6 +49,29 @@ public class FoodItemsController : Controller
     public async Task<ActionResult> DeleteAsync(int id)
     {
         await _foodItemsService.DeleteAsync(id);
+        return RedirectToAction("Index");
+    }
+
+    public async Task<ActionResult> Edit(int Id)
+    {
+
+        var foodItem = await _foodItemsService.GetAsync(Id);
+        if (foodItem == null)
+        {
+            return NotFound();
+        }
+
+        var foodItems = await _foodCategoryService.GetAll();
+        ViewBag.CategoryId = new SelectList(foodItems, "Id", "Name", foodItem.CategoryId);
+
+        return View(foodItem);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Edit(FoodItems foodItems)
+    {
+        await _foodItemsService.Update(foodItems);
         return RedirectToAction("Index");
     }
 }

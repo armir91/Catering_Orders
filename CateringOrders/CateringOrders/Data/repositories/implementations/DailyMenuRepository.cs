@@ -21,9 +21,11 @@ public class DailyMenuRepository : IDailyMenuRepository
         return result;
     }
 
-    public Task<DailyMenu> AddAsync(DailyMenu dailyMenu)
+    public async Task<DailyMenu> Create(DailyMenu dailyMenu)
     {
-        throw new NotImplementedException();
+        await _context.DailyMenus.AddAsync(dailyMenu);
+        await _context.SaveChangesAsync();
+        return (dailyMenu);
     }
 
     public Task<DailyMenu> DeleteAsync(int id)

@@ -17,4 +17,15 @@ public class DailyMenuService : IDailyMenuService
         var result = await _dailyMenuRepository.GetAllAsync();
         return result;
     }
+    public async Task<DailyMenu> Create(DailyMenu dailyMenu)
+    {
+        var result = await _dailyMenuRepository.Create(dailyMenu);
+        return result;
+
+    }
+
+    public async Task<DailyMenu> DeleteAsync(int id)
+    {
+        return await _dailyMenuRepository.DeleteAsync(id);
+    }
 }

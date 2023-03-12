@@ -22,7 +22,6 @@ public class FoodItemsController : Controller
         var resultTotal = await _foodItemsService.GetAll();
         return View(resultTotal);
     }
-
     public async Task<ActionResult> Create()
     {
         var foodCategories = await _foodCategoryService.GetAll();

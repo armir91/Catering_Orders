@@ -28,9 +28,9 @@ namespace CateringOrders.Controllers
         }
 
         //Breakpoint, new Implementations added for DailyMenuController
-        public async Task<ActionResult> Create()
+        public async Task<ActionResult> Create(string searchString)
         {
-            var foodList = await _foodItemsService.GetAll();
+            var foodList = await _foodItemsService.GetAll(searchString);
             ViewBag.FoodList = new SelectList(foodList, "Id", "Name");
             return View();
         }

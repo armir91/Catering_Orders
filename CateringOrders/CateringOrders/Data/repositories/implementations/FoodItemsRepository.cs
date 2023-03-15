@@ -11,11 +11,20 @@ public class FoodItemsRepository : IFoodItemsRepository
     {
         _context = context;
     }
-    public async Task<List<FoodItems>> GetAllAsync()
+    public async Task<List<FoodItems>> GetAllAsync(string searchString)
     {
         var result = await _context.FoodItems
-            .Include(f => f.FoodCategory)
+            .Include(f => f.FoodCategory).Where(FoodItems => FoodItems.IsDeleted == false)
             .ToListAsync();
+
+        if (!string.IsNullOrEmpty(searchString))
+        {
+            result = await _context.FoodItems
+            .Include(f => f.FoodCategory)
+            .Where(FoodItems => FoodItems.IsDeleted == false && (FoodItems.Name)
+            .Contains(searchString)).ToListAsync();
+        }
+
         return result;
     }
     public async Task<FoodItems> Create(FoodItems foodItems)

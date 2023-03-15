@@ -4,7 +4,7 @@ namespace CateringOrders.Data.Repositories.Implementations
 {
     public interface IFoodItemsRepository
     {
-        Task<List<FoodItems>> GetAllAsync();
+        Task<List<FoodItems>> GetAllAsync(string searchString);
         Task<FoodItems> Create(FoodItems foodItems);
         Task<FoodItems> Update(int Id);
         Task<FoodItems> Update(FoodItems foodItems);

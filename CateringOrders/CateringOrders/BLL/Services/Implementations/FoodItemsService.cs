@@ -14,9 +14,9 @@ public class FoodItemsService : IFoodItemsService
         _foodItemsRepository = foodItemsRepository ?? throw new ArgumentNullException(nameof(foodItemsRepository));
     }
 
-    public async Task<List<FoodItems>> GetAll()
+    public async Task<List<FoodItems>> GetAll(string searchString)
     {
-        var result = await _foodItemsRepository.GetAllAsync();
+        var result = await _foodItemsRepository.GetAllAsync(searchString);
         return result;
     }
 

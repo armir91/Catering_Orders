@@ -4,7 +4,7 @@ namespace CateringOrders.BLL.Services.Interfaces;
 
 public interface IFoodItemsService
 {
-    Task<List<FoodItems>> GetAll();
+    Task<List<FoodItems>> GetAll(string searchString);
     Task<FoodItems> Create(FoodItems foodItems);
     Task<FoodItems> DeleteAsync(int id);
     Task<FoodItems> Update(int id);

@@ -18,12 +18,12 @@ public class FoodItemsController : Controller
         _foodCategoryService = foodCategoryService ?? throw new ArgumentNullException(nameof(_foodCategoryService));
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string searchString)
     {
-        var resultTotal = await _foodItemsService.GetAll();
+        var resultTotal = await _foodItemsService.GetAll(searchString);
         return View(resultTotal);
     }
-    public async Task<ActionResult> Create()
+    public async Task<ActionResult> Create(string searchString)
     {
         var foodCategories = await _foodCategoryService.GetAll();
         ViewBag.FoodCategories = foodCategories;
@@ -52,7 +52,7 @@ public class FoodItemsController : Controller
         return RedirectToAction("Index");
     }
 
-    public async Task<ActionResult> Edit(int Id)
+    public async Task<ActionResult> Edit(int Id, string searchString)
     {
 
         var foodItem = await _foodItemsService.GetAsync(Id);
@@ -74,4 +74,5 @@ public class FoodItemsController : Controller
         await _foodItemsService.Update(foodItems);
         return RedirectToAction("Index");
     }
+
 }

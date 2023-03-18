@@ -41,8 +41,15 @@ public class FoodItemsRepository : IFoodItemsRepository
     {
         throw new NotImplementedException();
     }
-    public Task<FoodItems> UpdateAsync(FoodItems foodItems)
+
+    public async Task<FoodItems> Edit(int id)
     {
-        throw new NotImplementedException();
+        return await _context.FoodItems.FindAsync(id);
+    }
+    public async Task<FoodItems> Edit(FoodItems foodItems)
+    {
+        _context.FoodItems.Update(foodItems);
+        await _context.SaveChangesAsync();
+        return foodItems;
     }
 }
